@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <pthread.h>
 
+// The Helgrind thread error detection tool with which we can run our program, like this: 
+// 	valgrind --tool=helgrind ./programme.
+// The DRD thread error detection tool, which is also launched at runtime like this: 
+// 	valgrind --tool=drd ./programme.
 //gcc -fsanitize=thread -g main.c && ./a.out
+
 typedef	struct s_counter
 {
 	pthread_mutex_t	count_mutex;
