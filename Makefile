@@ -6,7 +6,7 @@
 #    By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/25 12:04:52 by sel-jadi          #+#    #+#              #
-#    Updated: 2024/07/25 12:22:24 by sel-jadi         ###   ########.fr        #
+#    Updated: 2024/07/26 16:14:28 by sel-jadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,13 @@ NAME = philosophers
 # 	valgrind --tool=drd
 # gcc -fsanitize=thread -g
 
-CC = cc -Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror -fsanitize=thread -g
 
-SRC =	philosophers.c 
+SRC =	philosophers.c \
+		utils.c \
+		data_init.c \
+		parse_input.c \
+		dinner_start.c \
 
 OBJ = $(SRC:.c=.o)
 
