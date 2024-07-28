@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 12:02:12 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/07/26 16:21:18 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:22:07 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_table
 	long	start;
 	bool	end;
 	bool	all_ready;
-	t_mtx	table_mutex;
+	// t_mtx	table_mutex;
 	t_fork	*forks;
 	t_philo	*philos;
 }				t_table;

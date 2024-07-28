@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 12:01:47 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/07/26 16:21:39 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/07/27 20:16:15 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		(printf("Invalid arguments number !"), exit(EXIT_FAILURE));
 	parse_input(&table, av);
-	data_init(&table);
+	// data_init(&table);
 	// dinner_start(&table);
 		//philos full | 1 philo died
 	// cleanup(&table);

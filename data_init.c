@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 16:12:21 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/07/26 16:18:08 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:22:19 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	data_init(t_table *table)
 	table->philos = malloc(sizeof(t_philo) * table->philo_nbr);
 	if (!table->philos)
 		(printf("Malloc failed!"), exit(EXIT_FAILURE));
-	pthread_mutex_init(&table->table_mutex, NULL);
+	// pthread_mutex_init(&table->table_mutex, NULL);
 	table->forks = malloc(sizeof(t_fork) * table->philo_nbr);
 	if (!table->philos)
 		(printf("Malloc failed!"), exit(EXIT_FAILURE));
