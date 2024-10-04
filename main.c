@@ -56,9 +56,7 @@ int main(void)
 	pthread_mutex_init(&counter.count_mutex, NULL);
 	counter.count = 0;
     pthread_create(&tid1, NULL, thread_routine, &counter);
-    printf("\nCreation [%lu]\n", (unsigned long)tid1);
     pthread_create(&tid2, NULL, thread_routine, &counter);
-    printf("\nCreation[%lu]\n\n", (unsigned long)tid2);
 
     pthread_join(tid1, NULL);
     // printf("\nMain: Union du premier thread [%lu]\n", (unsigned long)tid1);

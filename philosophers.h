@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 12:02:12 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/07/27 11:22:07 by sel-jadi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
@@ -59,5 +48,7 @@ struct	s_philo
 int		ft_atoi(char *str);
 void	parse_input(t_table *table, char **av);
 void	data_init(t_table *table);
+void	dinner_start(t_table *table);
+
 
 #endif

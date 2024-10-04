@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   data_init.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 16:12:21 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/07/27 11:22:19 by sel-jadi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "philosophers.h"
 
@@ -17,13 +6,15 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	int	philo_nbr;
 
 	philo_nbr = philo->table->philo_nbr;
-	philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
-	philo->second_fork = &forks[philo_position];
+	// Odd
 	if (philo->id % 2)
 	{
-		philo->first_fork = &forks[philo_position];
-		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
+		philo->first_fork = &forks[philo_position]; // Right fork
+		philo->second_fork = &forks[(philo_position + 1) % philo_nbr]; // Left fork (wrap around)
 	}
+	// even
+	philo->first_fork = &forks[(philo_position + 1) % philo_nbr]; // Left fork
+	philo->second_fork = &forks[philo_position];// Right fork
 }
 
 static void	philo_init(t_table *table)
@@ -50,13 +41,17 @@ void	data_init(t_table *table)
 	i = -1;
 	table->end = false;
 	table->all_ready = false;
+	//Allocate Memory for Philosophers
 	table->philos = malloc(sizeof(t_philo) * table->philo_nbr);
 	if (!table->philos)
 		(printf("Malloc failed!"), exit(EXIT_FAILURE));
+	// Global mutex
 	// pthread_mutex_init(&table->table_mutex, NULL);
+	// Allocate Memory for Forks
 	table->forks = malloc(sizeof(t_fork) * table->philo_nbr);
-	if (!table->philos)
+	if (!table->forks)
 		(printf("Malloc failed!"), exit(EXIT_FAILURE));
+	//Initialize Each Fork's Mutex
 	while (++i < table->philo_nbr)
 	{
 		pthread_mutex_init(&table->forks[i].fork, NULL);

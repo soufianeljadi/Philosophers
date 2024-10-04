@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/25 12:04:52 by sel-jadi          #+#    #+#              #
-#    Updated: 2024/07/26 16:14:28 by sel-jadi         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = philosophers
 
@@ -18,7 +7,7 @@ NAME = philosophers
 # 	valgrind --tool=drd
 # gcc -fsanitize=thread -g
 
-CC = cc -Wall -Wextra -Werror -fsanitize=thread -g
+CC = cc -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC =	philosophers.c \
 		utils.c \
