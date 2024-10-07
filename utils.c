@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 15:19:50 by sel-jadi          #+#    #+#             */
+/*   Updated: 2024/10/07 15:34:26 by sel-jadi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int			i;
 	int			s;
@@ -29,4 +40,43 @@ int	ft_atoi(char *str)
 	if (str[i] != '\0')
         return (-1);
 	return (r * s);
+}
+
+long long	timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
+
+long long	time_diff(long long past, long long pres)
+{
+	return (pres - past);
+}
+
+void		smart_sleep(long long time, t_table *table)
+{
+	long long i;
+
+	i = timestamp();
+	while (!(table->dieded))
+	{
+		if (time_diff(i, timestamp()) >= time)
+			break ;
+		usleep(50);
+	}
+}
+
+void		action_print(t_table *table, int id, char *string)
+{
+	pthread_mutex_lock(&(table->writing));
+	if (!(table->dieded))
+	{
+		printf("%lli ", timestamp() - table->first_timestamp);
+		printf("%i ", id + 1);
+		printf("%s\n", string);
+	}
+	pthread_mutex_unlock(&(table->writing));
+	return ;
 }

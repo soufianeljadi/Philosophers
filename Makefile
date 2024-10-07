@@ -10,10 +10,10 @@ NAME = philosophers
 CC = cc -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC =	philosophers.c \
+		error_manager.c \
+		init.c \
 		utils.c \
-		data_init.c \
-		parse_input.c \
-		dinner_start.c \
+		dinner_start.c
 
 OBJ = $(SRC:.c=.o)
 
