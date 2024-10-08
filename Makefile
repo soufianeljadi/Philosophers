@@ -11,7 +11,7 @@ CC = cc -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC =	philosophers.c \
 		error_manager.c \
-		init.c \
+		init_data.c \
 		utils.c \
 		dinner_start.c
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:05 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/07 15:33:49 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:07:15 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	not_empty(char *av)
 		return(1);
 	while(av[i])
 	{
-		if(av[i] != ' ' || av[i] != '\t')
+		if(av[i] != ' ' && av[i] != '\t')
 			return (1);// 1 means not empty
 		i++;
 	}
@@ -53,7 +53,7 @@ int	init_philosophers(t_table *table)
 	while (--i >= 0)
 	{
 		table->philosophers[i].id = i;
-		table->philosophers[i].x_ate = 0;
+		table->philosophers[i].meal_nbr = 0;
 		table->philosophers[i].left_fork_id = i;
 		table->philosophers[i].right_fork_id = (i + 1) % table->philo_nbr;
 		table->philosophers[i].t_last_meal = 0;
@@ -72,12 +72,12 @@ int	init_data(t_table *table, char **argv)
 	table->dieded = 0;
 	if (table->philo_nbr < 2 || table->time_to_die < 0 || table->time_to_eat < 0
 		|| table->time_to_sleep < 0 || table->philo_nbr > 250)
-		return (1);
+		(printf("Wrong arguments !"), exit(EXIT_FAILURE));
 	if (argv[5] && not_empty(argv[5]))
 	{
 		table->max_meals = ft_atoi(argv[5]);
 		if (table->max_meals <= 0)
-			return (1);
+			(printf("Wrong arguments !"), exit(EXIT_FAILURE));
 	}
 	else
 		table->max_meals = -1;
