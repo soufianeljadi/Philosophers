@@ -7,10 +7,10 @@ NAME = philosophers
 # 	valgrind --tool=drd
 # gcc -fsanitize=thread -g
 
-CC = cc -Wall -Wextra -Werror -fsanitize=address -g
+CC = cc -Wall -Wextra -Werror -fsanitize=thread -g 
+
 
 SRC =	philosophers.c \
-		error_manager.c \
 		init_data.c \
 		utils.c \
 		dinner_start.c

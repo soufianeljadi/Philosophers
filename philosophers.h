@@ -6,10 +6,9 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:41 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/08 14:23:45 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:31:08 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
@@ -54,9 +53,10 @@ typedef struct			s_table
 	t_philosopher		philosophers[250];
 }						t_table;
 
-int						write_error(char *str);
-
 int						init_data(t_table *table, char **argv);
+int						not_empty(char *av);
+int						init_mutex(t_table *table);
+int						init_philosophers(t_table *table);
 
 int						ft_atoi(const char *str);
 void					action_print(t_table *table, int id, char *string);
@@ -65,6 +65,9 @@ long long				time_diff(long long past, long long pres);
 void					smart_sleep(long long time, t_table *table);
 
 int						dinner_start(t_table *table);
+void					philo_eats(t_philosopher *philo);
+void					*actions(void *void_philosopher);
+void					death_checker(t_table *table, t_philosopher *p);
 void					exit_dinner(t_table *table, t_philosopher *philos);
 
 #endif
