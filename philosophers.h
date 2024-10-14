@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:41 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/14 13:56:56 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:28:55 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,27 @@
 # include <stdio.h>
 # include <limits.h>
 
-struct s_table;
+struct	s_table;
 
-//philo data
-typedef	struct			s_philosopher
+typedef struct s_philosopher
 {
 	int					id;
 	int					meal_nbr;
-	int					left_fork_id;//mutexes
-	int					right_fork_id;//mutexes
+	int					left_fork_id;
+	int					right_fork_id;
 	long long			t_last_meal;
 	pthread_t			thread_id;
-	struct s_table		*table; //The t_table structure holds global simulation parameters and shared resources, such as:
+	struct s_table		*table;
 }						t_philosopher;
 
-//global data 
-typedef struct			s_table
+typedef struct s_table
 {
 	int					philo_nbr;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					max_meals;
-	int					dieded;//m
+	int					dieded;
 	int					all_ate;
 	long long			first_timestamp;
 	pthread_mutex_t		meal_check;
@@ -57,6 +55,7 @@ int						init_data(t_table *table, char **argv);
 int						not_empty(char *av);
 int						init_mutex(t_table *table);
 int						init_philosophers(t_table *table);
+int						check_ate(t_table *table, t_philosopher *p);
 
 int						ft_atoi(const char *str);
 void					action_print(t_table *table, int id, char *string);
@@ -68,9 +67,6 @@ int						dinner_start(t_table *table);
 void					philo_eats(t_philosopher *philo);
 void					*actions(void *void_philosopher);
 void					death_checker(t_table *table, t_philosopher *p);
-void					exit_dinner(t_table *table, t_philosopher *philos);
+void					exit_dinner(t_table *table);
 
 #endif
-
-
-

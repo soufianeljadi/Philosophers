@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:50 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/13 16:41:03 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:17:41 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	ft_atoi(const char *str)
 	long int	r;
 	long int	x;
 
-	i = 0;
-	s = 1;
-	r = 0;
+	(1) && (i = 0, s = 1, r = 0);
 	if (!str[0])
 		return (-1);
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
@@ -38,7 +36,7 @@ int	ft_atoi(const char *str)
 		r = x;
 	}
 	if (str[i] != '\0')
-        return (-1);
+		return (-1);
 	return (r * s);
 }
 
@@ -57,9 +55,9 @@ long long	time_diff(long long past, long long pres)
 	return (pres - past);
 }
 
-void		smart_sleep(long long time, t_table *table)
+void	smart_sleep(long long time, t_table *table)
 {
-	long long i;
+	long long	i;
 
 	i = timestamp();
 	while (!(table->dieded))
@@ -70,7 +68,7 @@ void		smart_sleep(long long time, t_table *table)
 	}
 }
 
-void		action_print(t_table *table, int id, char *string)
+void	action_print(t_table *table, int id, char *string)
 {
 	pthread_mutex_lock(&(table->writing));
 	if (!(table->dieded))
