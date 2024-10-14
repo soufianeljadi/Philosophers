@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:50 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/07 15:34:26 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:41:03 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_atoi(const char *str)
 	return (r * s);
 }
 
+// 1 second = 1000 milliseconds
+// 1 millisecond = 1000 microseconds
 long long	timestamp(void)
 {
 	struct timeval	t;

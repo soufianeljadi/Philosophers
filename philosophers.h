@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:41 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/08 14:31:08 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:56:56 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef	struct			s_philosopher
 {
 	int					id;
 	int					meal_nbr;
-	int					left_fork_id;
-	int					right_fork_id;
+	int					left_fork_id;//mutexes
+	int					right_fork_id;//mutexes
 	long long			t_last_meal;
 	pthread_t			thread_id;
 	struct s_table		*table; //The t_table structure holds global simulation parameters and shared resources, such as:
@@ -44,7 +44,7 @@ typedef struct			s_table
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					max_meals;
-	int					dieded;
+	int					dieded;//m
 	int					all_ate;
 	long long			first_timestamp;
 	pthread_mutex_t		meal_check;
@@ -71,3 +71,6 @@ void					death_checker(t_table *table, t_philosopher *p);
 void					exit_dinner(t_table *table, t_philosopher *philos);
 
 #endif
+
+
+

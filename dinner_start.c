@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:59 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/13 15:00:58 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:19:33 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	philo_eats(t_philosopher *philo)
 	pthread_mutex_lock(&(table->forks[philo->right_fork_id]));
 	action_print(table, philo->id, "has taken a fork");
 	//start eating
-	pthread_mutex_lock(&(table->meal_check));
 	action_print(table, philo->id, "is eating");
 	//save time after meal and unlock it 
+	pthread_mutex_lock(&(table->meal_check));
 	philo->t_last_meal = timestamp();
 	pthread_mutex_unlock(&(table->meal_check));
-	//sleep time to eat 
+	//sleep time to eat
 	smart_sleep(table->time_to_eat, table);
 	//increment meal nbr
 	(philo->meal_nbr)++;
@@ -51,6 +51,13 @@ void	*actions(void *void_philosopher)
 		usleep(15000);
 	while (!(table->dieded))
 	{
+		if (table->philo_nbr == 1)
+		{
+			pthread_mutex_lock(&(table->forks[philo->left_fork_id]));
+			action_print(table, philo->id, "has taken a fork");
+			pthread_mutex_unlock(&(table->forks[philo->left_fork_id]));
+			break;
+		}
 		philo_eats(philo);
 		if (table->all_ate)
 			break ;
@@ -73,6 +80,7 @@ void	exit_dinner(t_table *table, t_philosopher *philos)
 	while (++i < table->philo_nbr)
 		pthread_mutex_destroy(&(table->forks[i]));
 	pthread_mutex_destroy(&(table->writing));
+	pthread_mutex_destroy(&(table->meal_check));
 }
 
 void	death_checker(t_table *table, t_philosopher *p)
@@ -85,10 +93,12 @@ void	death_checker(t_table *table, t_philosopher *p)
 		while (++i < table->philo_nbr && !(table->dieded))
 		{
 			pthread_mutex_lock(&(table->meal_check));
-			if (time_diff(p[i].t_last_meal, timestamp()) > table->time_to_die)
+			if (time_diff(p[i].t_last_meal, timestamp()) > table->time_to_die) //time past without eating
 			{
 				action_print(table, i, "died");
 				table->dieded = 1;
+				// pthread_mutex_unlock(&(table->meal_check));
+				// return ;
 			}
 			pthread_mutex_unlock(&(table->meal_check));
 			usleep(100);
@@ -115,7 +125,9 @@ int		dinner_start(t_table *table)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, actions, &(philo[i])))
 			return (1);
-		philo[i].t_last_meal = timestamp();
+			pthread_mutex_lock(&(table->meal_check));
+			philo[i].t_last_meal = timestamp();
+			pthread_mutex_unlock(&(table->meal_check));
 		i++;
 	}
 	death_checker(table, table->philosophers);

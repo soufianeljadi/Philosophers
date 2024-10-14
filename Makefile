@@ -1,5 +1,5 @@
 
-NAME = philosophers
+NAME = philo
 
 # The Helgrind thread error detection tool with which we can run our program, like this: 
 # 	valgrind --tool=helgrind
