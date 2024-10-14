@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:59 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/14 22:30:04 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:40:18 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	*actions(void *void_philosopher)
 			pthread_mutex_unlock(&(table->forks[philo->left_fork_id]));
 			break ;
 		}
+		philo_eats(philo);
 		action_print(table, philo->id, "is sleeping");
 		smart_sleep(table->time_to_sleep, table);
 		action_print(table, philo->id, "is thinking");

@@ -7,7 +7,7 @@ NAME = philo
 # 	valgrind --tool=drd
 # gcc -fsanitize=thread -g
 
-CC = cc -Wall -Wextra -Werror #-fsanitize=thread -g 
+CC = cc -Wall -Wextra -Werror -fsanitize=thread -g 
 
 
 SRC =	philosophers.c \
