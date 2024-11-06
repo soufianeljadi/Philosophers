@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:05 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/15 20:44:09 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:00:35 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	init_data(t_table *table, char **argv)
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
-	table->all_ate = 0;
-	table->dieded = 0;
 	if (table->philo_nbr <= 0 || table->time_to_die < 0
 		|| table->time_to_eat < 0
 		|| table->time_to_sleep < 0 || table->philo_nbr > 200)

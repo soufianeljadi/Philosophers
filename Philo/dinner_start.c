@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:59 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/15 20:41:21 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:01:28 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	philo_eats(t_philosopher *philo)
 	philo->t_last_meal = timestamp();
 	(philo->meal_nbr)++;
 	pthread_mutex_unlock(&(table->meal_check));
-	smart_sleep(table->time_to_eat, table);
+	smart_sleep(table->time_to_eat);
 	pthread_mutex_unlock(&(table->forks[philo->left_fork_id]));
 	pthread_mutex_unlock(&(table->forks[philo->right_fork_id]));
 }
@@ -53,7 +53,7 @@ void	*actions(void *void_philosopher)
 		}
 		philo_eats(philo);
 		action_print(table, philo->id, "is sleeping");
-		smart_sleep(table->time_to_sleep, table);
+		smart_sleep(table->time_to_sleep);
 		action_print(table, philo->id, "is thinking");
 	}
 	return (NULL);
@@ -74,10 +74,10 @@ void	death_checker(t_table *table, t_philosopher *p)
 {
 	int	i;
 
-	while (!(table->all_ate))
+	while (1)
 	{
 		i = -1;
-		while (++i < table->philo_nbr && !(table->dieded))
+		while (++i < table->philo_nbr)
 		{
 			pthread_mutex_lock(&(table->meal_check));
 			if (time_diff(p[i].t_last_meal, timestamp()) > table->time_to_die)
@@ -91,8 +91,6 @@ void	death_checker(t_table *table, t_philosopher *p)
 			pthread_mutex_unlock(&(table->meal_check));
 			usleep(100);
 		}
-		if (table->dieded)
-			break ;
 		if (table->max_meals && check_ate(table, p))
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:50 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/14 22:17:41 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:11:30 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ long long	time_diff(long long past, long long pres)
 	return (pres - past);
 }
 
-void	smart_sleep(long long time, t_table *table)
+void	smart_sleep(long long time)
 {
 	long long	i;
 
 	i = timestamp();
-	while (!(table->dieded))
+	while (1)
 	{
 		if (time_diff(i, timestamp()) >= time)
 			break ;
@@ -71,12 +71,9 @@ void	smart_sleep(long long time, t_table *table)
 void	action_print(t_table *table, int id, char *string)
 {
 	pthread_mutex_lock(&(table->writing));
-	if (!(table->dieded))
-	{
-		printf("%lli ", timestamp() - table->first_timestamp);
-		printf("%i ", id + 1);
-		printf("%s\n", string);
-	}
+	printf("%lli ", timestamp() - table->first_timestamp);
+	printf("%i ", id + 1);
+	printf("%s\n", string);
 	pthread_mutex_unlock(&(table->writing));
 	return ;
 }

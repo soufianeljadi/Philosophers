@@ -6,7 +6,7 @@
 /*   By: sel-jadi <sel-jadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:41 by sel-jadi          #+#    #+#             */
-/*   Updated: 2024/10/15 20:43:46 by sel-jadi         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:16:02 by sel-jadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <pthread.h>
-# include <stdio.h>
-# include <limits.h>
 
 struct	s_table;
 
@@ -42,8 +38,6 @@ typedef struct s_table
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					max_meals;
-	int					dieded;
-	int					all_ate;
 	long long			first_timestamp;
 	pthread_mutex_t		meal_check;
 	pthread_mutex_t		forks[200];
@@ -61,7 +55,7 @@ int						ft_atoi(const char *str);
 void					action_print(t_table *table, int id, char *string);
 long long				timestamp(void);
 long long				time_diff(long long past, long long pres);
-void					smart_sleep(long long time, t_table *table);
+void					smart_sleep(long long time);
 
 int						dinner_start(t_table *table);
 void					philo_eats(t_philosopher *philo);
